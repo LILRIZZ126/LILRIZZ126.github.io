@@ -403,4 +403,123 @@ footer p {
     .hero-image {
         width: 100%;
     }
+}/* ==================================
+   LILRIZZ ANIMATED BACKGROUND
+================================== */
+
+body {
+    background: #080808;
+    position: relative;
+    isolation: isolate;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 70, 0, .25),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 0, 40, .20),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 120, 0, .12),
+            transparent 35%
+        );
+
+    filter: blur(55px);
+    animation: movingGlow 14s ease-in-out infinite alternate;
+}
+
+@keyframes movingGlow {
+    0% {
+        transform: translate(-5%, -3%) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(5%, 4%) rotate(15deg) scale(1.15);
+    }
+
+    100% {
+        transform: translate(-3%, 7%) rotate(-10deg) scale(1.05);
+    }
+}
+
+/* ANIMATED HERO LIGHT */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    background-size: 110% auto;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+    from {
+        background-size: 100% auto;
+    }
+
+    to {
+        background-size: 115% auto;
+    }
+}
+
+/* FLOATING LIGHT */
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 75, 0, .18);
+    filter: blur(90px);
+    top: 15%;
+    right: 10%;
+    pointer-events: none;
+    animation: floatingLight 7s ease-in-out infinite alternate;
+}
+
+@keyframes floatingLight {
+    0% {
+        transform: translate(0, 0);
+        opacity: .4;
+    }
+
+    100% {
+        transform: translate(-100px, 70px);
+        opacity: 1;
+    }
+}
+
+/* MENU CARD GLOW */
+
+.menu-card {
+    position: relative;
+    transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(255, 75, 0, .3);
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    .hero,
+    .hero::after {
+        animation: none;
+    }
 }
