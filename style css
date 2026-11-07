@@ -1,295 +1,89 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ===== LILRIZZ PREMIUM BACKGROUND ===== */
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    background: #11100f;
-    color: #f5eee3;
-    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 75, 0, 0.20),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 60%,
+            rgba(255, 0, 50, 0.13),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #080808,
+            #17100e,
+            #090909
+        );
+    color: #ffffff;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 7%;
-    border-bottom: 1px solid #333;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo-icon {
-    background: #e5442f;
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 5px 13px;
-    font-family: 'Oswald', sans-serif;
-}
-
-.logo h2, footer h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 27px;
-}
-
-.logo span, footer span {
-    color: #e5442f;
-}
-
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #ff9b35;
-}
-
-.nav-button {
-    background: #e5442f;
-    padding: 13px 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-}
+/* HERO SECTION */
 
 .hero {
-    min-height: 620px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 70px 7%;
-    gap: 40px;
-}
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.95),
+            rgba(20,10,5,0.65),
+            rgba(0,0,0,0.25)
+        ),
+        url("https://images.unsplash.com/photo-1569718212165-3a8278d5f624")
+        center/cover no-repeat;
 
-.hero-content {
-    max-width: 550px;
-}
-
-.subtitle {
-    color: #ff9b35;
-    letter-spacing: 3px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.hero h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(55px, 7vw, 95px);
-    line-height: 1;
-    margin-bottom: 25px;
-}
-
-h1 span, h2 span {
-    color: #e5442f;
-}
-
-.description {
-    color: #aaa;
-    line-height: 1.8;
-    margin-bottom: 30px;
-    max-width: 430px;
-}
-
-.btn {
-    display: inline-block;
-    background: #e5442f;
-    color: white;
-    text-decoration: none;
-    padding: 16px 25px;
-    font-size: 12px;
-    font-weight: bold;
-    transition: .3s;
-}
-
-.btn:hover {
-    background: #ff9b35;
-    transform: translateY(-3px);
-}
-
-.hero-image {
-    width: 440px;
-    height: 440px;
+    min-height: 90vh;
     position: relative;
-    flex-shrink: 0;
 }
 
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 9px solid #30251f;
+/* MENU SECTION */
+
+.menu,
+.about,
+.contact {
+    background: transparent;
 }
 
-.image-label {
-    position: absolute;
-    top: 20px;
-    left: -30px;
-    background: #ff9b35;
-    color: #111;
-    padding: 15px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: bold;
-    transform: rotate(-8deg);
-}
-
-.menu {
-    padding: 100px 7%;
-    text-align: center;
-    background: #1b1917;
-}
-
-.menu h2, .about h2, .contact h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 65px;
-    margin-bottom: 40px;
-}
-
-.menu-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
+/* MENU CARD */
 
 .menu-card {
-    background: #292522;
-    padding-bottom: 25px;
-    text-align: left;
-    transition: .3s;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,100,30,0.25);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    transition: 0.3s ease;
 }
 
 .menu-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+    border-color: #ff5a1f;
+    box-shadow: 0 10px 35px rgba(255,70,0,0.2);
 }
 
-.menu-card img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
+/* BUTTON */
+
+button,
+.btn {
+    background: linear-gradient(
+        135deg,
+        #ff6a00,
+        #ff2500
+    );
+    color: white;
+    border: none;
+    border-radius: 30px;
+    transition: 0.3s;
 }
 
-.menu-card h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 23px;
-    margin: 20px 20px 10px;
+button:hover,
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,80,0,0.5);
 }
-
-.menu-card p {
-    color: #aaa;
-    font-size: 13px;
-    margin: 0 20px 15px;
-}
-
-.menu-card h4 {
-    color: #ff9b35;
-    margin: 0 20px;
-    font-size: 18px;
-}
-
-.about {
-    padding: 120px 10%;
-    background: #211b17;
-}
-
-.about > div {
-    max-width: 600px;
-}
-
-.about h2 {
-    line-height: 1;
-    margin-bottom: 25px;
-}
-
-.about p:last-child {
-    color: #aaa;
-    line-height: 1.9;
-}
-
-.contact {
-    text-align: center;
-    padding: 100px 20px;
-}
-
-.contact h2 {
-    font-size: 75px;
-    line-height: 1;
-}
-
-footer {
-    border-top: 1px solid #333;
-    padding: 35px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-footer p {
-    color: #888;
-    font-size: 10px;
-    text-align: right;
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 20px 5%;
-    }
-
-    nav {
-        display: none;
-    }
-
-    .hero {
-        flex-direction: column;
-        padding: 65px 7%;
-    }
-
-    .hero-image {
-        width: min(80vw, 350px);
-        height: min(80vw, 350px);
-    }
-
-    .menu-container {
-        grid-template-columns: 1fr;
-    }
-
-    .menu h2, .about h2 {
-        font-size: 50px;
-    }
-
-    .contact h2 {
-        font-size: 52px;
-    }
-
-    footer {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    footer p {
-        text-align: center;
-    }
-}
-
