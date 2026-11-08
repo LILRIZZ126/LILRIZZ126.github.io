@@ -148,7 +148,33 @@
         <div class="logo">RIZZ<span>.MONEY</span></div>
         <p>© 2026 RIZZ.MONEY. Learn Today, Grow Tomorrow.</p>
         <p>Financial Education Platform</p>
-    </footer>
+    </footer><script>
+const container = document.getElementById("candleContainer");
+
+function createCandles() {
+    for (let i = 0; i < 65; i++) {
+        const candle = document.createElement("div");
+
+        candle.className = "candle " +
+            (Math.random() > 0.5 ? "green" : "red");
+
+        candle.style.height = (20 + Math.random() * 100) + "px";
+        candle.style.animationDelay = (Math.random() * 1.5) + "s";
+
+        container.appendChild(candle);
+    }
+}
+
+createCandles();
+
+setInterval(() => {
+    document.querySelectorAll(".candle").forEach(candle => {
+        candle.style.height = (20 + Math.random() * 100) + "px";
+        candle.className = "candle " +
+            (Math.random() > 0.5 ? "green" : "red");
+    });
+}, 1500);
+</script>
 
 </body>
 </html>
