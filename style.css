@@ -397,3 +397,89 @@ footer p {
         font-size: 29px;
     }
 }
+/* ANIMATED TRADING CHART */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #050907;
+}
+
+.trading-chart {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.55;
+    pointer-events: none;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 15%,
+        black 90%,
+        transparent
+    );
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(#ffffff12 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff12 1px, transparent 1px);
+    background-size: 55px 45px;
+}
+
+.candle-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 100%;
+}
+
+.candle {
+    position: relative;
+    width: 13px;
+    flex-shrink: 0;
+    animation: candleMove 1.5s ease-in-out infinite alternate;
+}
+
+.candle::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: calc(100% + 30px);
+    background: inherit;
+    left: 50%;
+    top: -15px;
+    transform: translateX(-50%);
+}
+
+.candle.green {
+    background: #00e68a;
+    box-shadow: 0 0 12px #00e68a66;
+}
+
+.candle.red {
+    background: #ff4655;
+    box-shadow: 0 0 12px #ff465566;
+}
+
+@keyframes candleMove {
+    from {
+        transform: translateY(-12px) scaleY(0.85);
+    }
+    to {
+        transform: translateY(12px) scaleY(1.15);
+    }
+}
+
+.hero-content,
+.money-card {
+    position: relative;
+    z-index: 2;
+}
+
