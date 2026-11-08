@@ -1,162 +1,399 @@
-/* Pengaturan Halaman Utama */
-body {
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #f7d695; /* Warna latar belakang hangat */
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #070b09;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* NAVBAR */
+
+.navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-}
-
-/* Kontainer Utama */
-.noodle-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* --- ANIMASI UAP PANAS MIE GORENG --- */
-.steam-container {
-    position: absolute;
-    top: -60px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    width: 100px;
-}
-
-.steam {
-    width: 8px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    filter: blur(3px);
-    animation: floatingSteam 2s infinite ease-in-out;
-}
-
-/* Variasi gerakan uap */
-.steam1 { animation-delay: 0s; }
-.steam2 { animation-delay: 0.4s; height: 50px; top: -10px; }
-.steam3 { animation-delay: 0.8s; }
-
-@keyframes floatingSteam {
-    0% {
-        transform: translateY(10px) scaleX(1);
-        opacity: 0;
-    }
-    50% {
-        opacity: 0.7;
-        transform: translateY(-20px) scaleX(1.5) skewX(10deg);
-    }
-    100% {
-        transform: translateY(-50px) scaleX(0.5) skewX(-10deg);
-        opacity: 0;
-    }
-}
-
-/* --- MANGKUK --- */
-.bowl {
-    width: 200px;
-    height: 100px;
-    background: #e74c3c; /* Mangkuk merah merona */
-    border-bottom-left-radius: 100px;
-    border-bottom-right-radius: 100px;
-    position: relative;
-    border: 6px solid #c0392b;
-    box-shadow: inset 0 -10px 0 rgba(0,0,0,0.1);
-    z-index: 2;
-    overflow: hidden;
-}
-
-/* --- MIE GORENG --- */
-.fried-noodle {
-    width: 100%;
-    height: 40px;
-    background: #d35400; /* Warna dasar mie goreng kecap */
-    position: absolute;
+    padding: 25px 8%;
+    background: rgba(7, 11, 9, 0.9);
+    position: sticky;
     top: 0;
-    border-radius: 20px 20px 0 0;
-    animation: noodleGlow 3s infinite alternate;
+    z-index: 100;
+    backdrop-filter: blur(15px);
 }
 
-/* Efek Mie Bergelombang */
-.noodle-strand {
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #00e68a;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #00e68a;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #000;
+    background: #00e68a;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 80% 40%, #063b29 0%, transparent 35%),
+      linear-gradient(135deg, #070b09, #0b1711, #07100c);
+    background-size: 200% 200%;
+    animation: backgroundMove 10s ease infinite;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero-content {
+    max-width: 620px;
+    z-index: 2;
+}
+
+.tagline {
+    color: #00e68a;
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 5vw, 65px);
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.hero h1 span,
+.section h2 span,
+.cta h2 span {
+    color: #00e68a;
+}
+
+.description {
+    color: #aaa;
+    margin-top: 25px;
+    line-height: 1.9;
+    max-width: 550px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background: #00e68a;
+    color: #001b10;
+}
+
+.secondary-btn {
+    border: 1px solid #00e68a;
+    color: white;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.nav-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #00e68a55;
+}
+
+/* MONEY CARD */
+
+.money-card {
+    width: 320px;
+    min-height: 340px;
+    padding: 30px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #103b29, #071b12);
+    border: 1px solid #00e68a55;
+    box-shadow: 0 0 60px #00e68a22;
+    z-index: 2;
+    animation: floating 4s ease-in-out infinite;
+}
+
+.card-top,
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-top {
+    color: #00e68a;
+    font-weight: 700;
+}
+
+.money-card > p {
+    margin-top: 75px;
+    color: #aaa;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.money-card h2 {
+    font-size: 34px;
+    margin: 12px 0 50px;
+}
+
+.card-bottom {
+    color: #00e68a;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* GLOW EFFECT */
+
+.glow {
     position: absolute;
-    background: transparent;
-    border: 5px solid #f39c12; /* Warna jalinan mie */
     border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    animation: glowMove 8s infinite alternate;
 }
 
-.strand1 { width: 80px; height: 30px; top: -5px; left: 10px; }
-.strand2 { width: 90px; height: 35px; top: 5px; right: 15px; }
-.strand3 { width: 70px; height: 25px; top: -8px; left: 60px; }
-
-/* Animasi kilau mie hangat */
-@keyframes noodleGlow {
-    0% { filter: brightness(1); }
-    100% { filter: brightness(1.1); }
+.glow-one {
+    width: 250px;
+    height: 250px;
+    background: #00e68a;
+    top: 10%;
+    left: 30%;
 }
 
-/* --- TOPPING: TELUR MATA SAPI --- */
-.egg {
-    width: 70px;
-    height: 50px;
-    background: #fff;
-    border-radius: 40% 50% 45% 40%;
-    position: absolute;
-    top: 5px;
-    left: 65px;
-    transform: rotate(-10deg);
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+.glow-two {
+    width: 300px;
+    height: 300px;
+    background: #007a4b;
+    bottom: 0;
+    right: 5%;
 }
 
-.yolk {
-    width: 25px;
-    height: 25px;
-    background: #f1c40f; /* Kuning telur */
-    border-radius: 50%;
-    position: absolute;
-    top: 12px;
-    left: 20px;
-    box-shadow: inset -3px -3px 0 #d4ac0d;
+@keyframes glowMove {
+    from { transform: translate(0, 0); }
+    to { transform: translate(60px, -40px); }
 }
 
-/* --- SUMPIT --- */
-.chopsticks {
-    position: absolute;
-    width: 140px;
-    height: 6px;
-    background: #795548; /* Sumpit kayu */
-    top: -20px;
-    right: -30px;
-    transform: rotate(-25deg);
-    border-radius: 3px;
-    z-index: 3;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    animation: eatAction 2.5s infinite ease-in-out;
+/* SECTIONS */
+
+.section {
+    padding: 100px 10%;
+    text-align: center;
 }
 
-/* Animasi sumpit bergerak naik turun seolah sedang memakan mie */
-@keyframes eatAction {
-    0%, 100% { transform: rotate(-25deg) translateY(0); }
-    50% { transform: rotate(-22deg) translateY(-8px) translateX(-5px); }
+.section h2,
+.cta h2 {
+    font-size: 38px;
+    margin-bottom: 25px;
 }
 
-/* --- BAYANGAN MANGKUK --- */
-.shadow {
-    width: 160px;
-    height: 15px;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 50%;
-    margin-top: 10px;
-    animation: shadowPulse 2.5s infinite ease-in-out;
+.about > p:last-child {
+    max-width: 750px;
+    margin: auto;
+    line-height: 2;
+    color: #aaa;
 }
 
-@keyframes shadowPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); opacity: 0.8; }
+/* FEATURES */
+
+.features {
+    background: #0b120e;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background: #101c15;
+    border: 1px solid #1e3c2c;
+    border-radius: 20px;
+    padding: 30px 20px;
+    transition: 0.4s;
+}
+
+.feature-card:hover {
+    transform: translateY(-12px);
+    border-color: #00e68a;
+    box-shadow: 0 10px 35px #00e68a15;
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+}
+
+.feature-card p,
+.tip p {
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* TIPS */
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.tip {
+    text-align: left;
+    padding: 30px;
+    border-left: 2px solid #00e68a;
+    background: #101812;
+    border-radius: 10px;
+}
+
+.tip span {
+    font-size: 35px;
+    color: #00e68a;
+    font-weight: 800;
+}
+
+.tip h3 {
+    margin: 15px 0;
+}
+
+/* CTA */
+
+.cta {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #0c2619, #07100c);
+}
+
+.cta .primary-btn {
+    margin-top: 15px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 40px 10%;
+    text-align: center;
+    background: #050806;
+}
+
+footer p {
+    color: #777;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 60px;
+    }
+
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 80px 6%;
+    }
+
+    .money-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .feature-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section h2,
+    .cta h2 {
+        font-size: 29px;
+    }
 }
