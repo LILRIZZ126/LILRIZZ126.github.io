@@ -249,6 +249,64 @@ setInterval(() => {
         // Jalankan running chart dinamis setiap 500ms
         setInterval(createCandle, 500);
     });
+</script><!-- Modal Get Started -->
+<div class="modal-overlay" id="getStartedModal">
+    <div class="modal-content">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <h3>Mulai Perjalanan Anda 🚀</h3>
+        <p>Daftar gratis untuk mendapatkan tips keuangan dan panduan eksklusif dari RIZZ.MONEY.</p>
+        <form class="modal-form" onsubmit="event.preventDefault(); alert('Terima kasih! Anda berhasil mendaftar.'); document.getElementById('getStartedModal').classList.remove('active');">
+            <input type="text" placeholder="Nama Lengkap" required>
+            <input type="email" placeholder="Alamat Email" required>
+            <button type="submit">Daftar Sekarang</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. Logika Modal Get Started ---
+        const modal = document.getElementById("getStartedModal");
+        const closeModalBtn = document.getElementById("closeModal");
+        const getStartedBtns = document.querySelectorAll('a[href="#features"].nav-btn, .hero-buttons .primary-btn');
+
+        // Buka modal saat tombol Get Started diklik
+        getStartedBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                modal.classList.add("active");
+            });
+        });
+
+        // Tutup modal
+        closeModalBtn.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
+
+        // --- 2. Smooth Scroll untuk Navigasi Lainnya ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function (e) {
+                if (this.classList.contains("nav-btn")) return; // Lewati jika tombol Get Started modal
+                
+                const targetId = this.getAttribute("href");
+                if (targetId === "#") return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>
