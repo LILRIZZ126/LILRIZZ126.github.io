@@ -177,57 +177,70 @@ setInterval(() => {
 </script><script>
     document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("candleContainer");
-        const maxCandles = 40; // Jumlah maksimum batang candle di layar
-        let currentPrice = 150;
+        const maxCandles = 35;
+        
+        let currentPrice = 120;
+        let trend = 0; // Tren pergerakan pasar (-1 sampai 1)
+
+        function generateCandleData() {
+            // Ubah tren secara berkala agar grafik membuat gelombang naik & turun
+            if (Math.random() < 0.2) {
+                trend = (Math.random() - 0.5) * 2;
+            }
+
+            // Fluktuasi harga acak yang dipengaruhi tren saat ini
+            const volatility = 12;
+            const change = (Math.random() - 0.48 + trend * 0.3) * volatility;
+            
+            const open = currentPrice;
+            let close = open + change;
+
+            // Batasi harga agar tetap berada di dalam area tampilan container
+            close = Math.max(20, Math.min(220, close));
+
+            const high = Math.max(open, close) + Math.random() * 6;
+            const low = Math.min(open, close) - Math.random() * 6;
+
+            currentPrice = close; // Update harga terakhir
+
+            return { open, close, high, low };
+        }
 
         function createCandle() {
-            // Kalkulasi pergerakan harga acak
-            const change = (Math.random() - 0.48) * 15;
-            const open = currentPrice;
-            const close = open + change;
+            const { open, close, high, low } = generateCandleData();
             const isGreen = close >= open;
 
-            const high = Math.max(open, close) + Math.random() * 8;
-            const low = Math.min(open, close) - Math.random() * 8;
-
-            currentPrice = Math.max(30, Math.min(280, close)); // Batas area render
-
-            // Buat elemen candle
             const candle = document.createElement("div");
             candle.classList.add("candle", isGreen ? "green" : "red");
 
-            // Tinggi body candle dan posisi bottom
             const bodyHeight = Math.max(4, Math.abs(close - open));
             const bodyBottom = Math.min(open, close);
 
             candle.style.height = `${bodyHeight}px`;
             candle.style.bottom = `${bodyBottom}px`;
 
-            // Tinggi sumbu atas dan bawah (relatif terhadap body)
             const wickTop = -Math.abs(high - Math.max(open, close));
             const wickBottom = -Math.abs(Math.min(open, close) - low);
 
             candle.style.setProperty("--wick-top", `${wickTop}px`);
             candle.style.setProperty("--wick-bottom", `${wickBottom}px`);
 
-            // Masukkan ke container
             container.appendChild(candle);
 
-            // Hapus candle paling kiri jika sudah melebihi kapasitas layar
+            // Geser & hapus elemen lama agar animasi mengalir lurus ke kiri
             if (container.children.length > maxCandles) {
                 container.removeChild(container.firstChild);
             }
         }
 
-        // Isi candle awal saat halaman dimuat
+        // Generate data awal agar grafik langsung terisi penuh
         for (let i = 0; i < 25; i++) {
             createCandle();
         }
 
-        // Interval penambahan candle secara real-time (setiap 800ms)
-        setInterval(createCandle, 800);
+        // Tambah candle baru setiap 600ms untuk efek running chart
+        setInterval(createCandle, 600);
     });
 </script>
-
 </body>
 </html>
