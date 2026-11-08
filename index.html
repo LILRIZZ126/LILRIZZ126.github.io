@@ -174,6 +174,59 @@ setInterval(() => {
             (Math.random() > 0.5 ? "green" : "red");
     });
 }, 1500);
+</script><script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("candleContainer");
+        const maxCandles = 40; // Jumlah maksimum batang candle di layar
+        let currentPrice = 150;
+
+        function createCandle() {
+            // Kalkulasi pergerakan harga acak
+            const change = (Math.random() - 0.48) * 15;
+            const open = currentPrice;
+            const close = open + change;
+            const isGreen = close >= open;
+
+            const high = Math.max(open, close) + Math.random() * 8;
+            const low = Math.min(open, close) - Math.random() * 8;
+
+            currentPrice = Math.max(30, Math.min(280, close)); // Batas area render
+
+            // Buat elemen candle
+            const candle = document.createElement("div");
+            candle.classList.add("candle", isGreen ? "green" : "red");
+
+            // Tinggi body candle dan posisi bottom
+            const bodyHeight = Math.max(4, Math.abs(close - open));
+            const bodyBottom = Math.min(open, close);
+
+            candle.style.height = `${bodyHeight}px`;
+            candle.style.bottom = `${bodyBottom}px`;
+
+            // Tinggi sumbu atas dan bawah (relatif terhadap body)
+            const wickTop = -Math.abs(high - Math.max(open, close));
+            const wickBottom = -Math.abs(Math.min(open, close) - low);
+
+            candle.style.setProperty("--wick-top", `${wickTop}px`);
+            candle.style.setProperty("--wick-bottom", `${wickBottom}px`);
+
+            // Masukkan ke container
+            container.appendChild(candle);
+
+            // Hapus candle paling kiri jika sudah melebihi kapasitas layar
+            if (container.children.length > maxCandles) {
+                container.removeChild(container.firstChild);
+            }
+        }
+
+        // Isi candle awal saat halaman dimuat
+        for (let i = 0; i < 25; i++) {
+            createCandle();
+        }
+
+        // Interval penambahan candle secara real-time (setiap 800ms)
+        setInterval(createCandle, 800);
+    });
 </script>
 
 </body>
