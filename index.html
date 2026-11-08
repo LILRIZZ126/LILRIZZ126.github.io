@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -17,18 +16,18 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
+            <li><a href="#calculator">Calculator</a></li>
             <li><a href="#tips">Money Tips</a></li>
         </ul>
 
-        <a href="#features" class="nav-btn">Get Started</a>
+        <a href="#calculator" class="nav-btn">Get Started</a>
     </nav>
 
     <section class="hero" id="home">
-        
-<div class="trading-chart">
-    <div class="chart-grid"></div>
-    <div class="candle-container" id="candleContainer"></div>
-</div>
+        <div class="trading-chart">
+            <div class="chart-grid"></div>
+            <div class="candle-container" id="candleContainer"></div>
+        </div>
 
         <div class="hero-content">
             <p class="tagline">YOUR MONEY, YOUR FUTURE</p>
@@ -85,7 +84,6 @@
         <h2>Build Your Financial Skills</h2>
 
         <div class="feature-grid">
-
             <div class="feature-card">
                 <div class="icon">💰</div>
                 <h3>Money Management</h3>
@@ -109,7 +107,57 @@
                 <h3>Financial Literacy</h3>
                 <p>Understand financial concepts and make informed decisions.</p>
             </div>
+        </div>
+    </section>
 
+    <!-- --- SEKSI TAMBAHAN: KALKULATOR INTERAKTIF --- -->
+    <section class="calculator-section section" id="calculator">
+        <p class="tagline">INTERACTIVE BUDGETING</p>
+        <h2>Try 50/30/20 Budget Rule</h2>
+        
+        <div class="calc-wrapper">
+            <div class="calc-container">
+                <h2>Perencana Anggaran</h2>
+                <p class="calc-subtitle">Bagi pendapatan bulanan Anda ke dalam pos yang ideal secara instan.</p>
+
+                <div class="input-group">
+                    <label for="income">Total Pendapatan Bulanan</label>
+                    <div class="input-wrapper">
+                        <span class="currency-prefix">Rp</span>
+                        <input type="number" id="income" placeholder="Contoh: 5000000" oninput="hitungAnggaran()">
+                    </div>
+                </div>
+
+                <div class="result-item needs">
+                    <div class="result-header">
+                        <span class="label-text">Kebutuhan Pokok (50%)</span>
+                        <span class="amount-text" id="needs-val">Rp 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="needs-bar"></div>
+                    </div>
+                </div>
+
+                <div class="result-item wants">
+                    <div class="result-header">
+                        <span class="label-text">Keinginan & Hiburan (30%)</span>
+                        <span class="amount-text" id="wants-val">Rp 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="wants-bar"></div>
+                    </div>
+                </div>
+
+                <div class="result-item savings">
+                    <div class="result-header">
+                        <span class="label-text">Tabungan & Investasi (20%)</span>
+                        <span class="amount-text" id="savings-val">Rp 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="savings-bar"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -148,165 +196,229 @@
         <div class="logo">RIZZ<span>.MONEY</span></div>
         <p>© 2026 RIZZ.MONEY. Learn Today, Grow Tomorrow.</p>
         <p>Financial Education Platform</p>
-    </footer><script>
-const container = document.getElementById("candleContainer");
+    </footer>
 
-function createCandles() {
-    for (let i = 0; i < 65; i++) {
-        const candle = document.createElement("div");
+    <!-- --- LOGIKAJAVASCRIPT --- -->
+    <script>
+        // 1. Script Efek Chart Market (Hero)
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("candleContainer");
+            const maxCandles = 35;
 
-        candle.className = "candle " +
-            (Math.random() > 0.5 ? "green" : "red");
+            let basePrice = 120;       
+            let waveAngle = 0;         
+            let momentum = 0;          
+            let currentPrice = basePrice;
 
-        candle.style.height = (20 + Math.random() * 100) + "px";
-        candle.style.animationDelay = (Math.random() * 1.5) + "s";
+            function generateCandleData() {
+                waveAngle += 0.15; 
+                const waveForce = Math.sin(waveAngle) * 3.5; 
+                momentum = momentum * 0.8 + waveForce * 0.2;
+                const noise = (Math.random() - 0.49) * 4;
+                const change = momentum + noise;
 
-        container.appendChild(candle);
-    }
+                const open = currentPrice;
+                let close = open + change;
+
+                close = Math.max(30, Math.min(220, close));
+
+                const high = Math.max(open, close) + Math.random() * 5;
+                const low = Math.min(open, close) - Math.random() * 5;
+
+                currentPrice = close; 
+                return { open, close, high, low };
+            }
+
+            function createCandle() {
+                const { open, close, high, low } = generateCandleData();
+                const isGreen = close >= open;
+
+                const candle = document.createElement("div");
+                candle.classList.add("candle", isGreen ? "green" : "red");
+
+                const bodyHeight = Math.max(4, Math.abs(close - open));
+                const bodyBottom = Math.min(open, close);
+
+                candle.style.height = `${bodyHeight}px`;
+                candle.style.bottom = `${bodyBottom}px`;
+
+                const wickTop = -Math.abs(high - Math.max(open, close));
+                const wickBottom = -Math.abs(Math.min(open, close) - low);
+
+                candle.style.setProperty("--wick-top", `${wickTop}px`);
+                candle.style.setProperty("--wick-bottom", `${wickBottom}px`);
+
+                container.appendChild(candle);
+
+                if (container.children.length > maxCandles) {
+                    container.removeChild(container.firstChild);
+                }
+            }
+
+            // Inisialisasi awal lilin grafik hero
+            for (let i = 0; i < maxCandles; i++) {
+                createCandle();
+            }
+            setInterval(createCandle, 1500);
+        });
+
+        // 2. Script Hitung Kalkulator Finansial
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        function hitungAnggaran() {
+Use code with caution.
+const incomeInput = document.getElementById('income').value;
+const income = parseFloat(incomeInput) || 0;
+const needs = income * 0.50;
+const wants = income * 0.30;
+const savings = income * 0.20;
+document.getElementById('needs-val').innerText = formatRupiah(needs);
+document.getElementById('wants-val').innerText = formatRupiah(wants);
+document.getElementById('savings-val').innerText = formatRupiah(savings);
+if (income > 0) {
+document.getElementById('needs-bar').style.width = '50%';
+document.getElementById('wants-bar').style.width = '30%';
+document.getElementById('savings-bar').style.width = '20%';
+} else {
+document.getElementById('needs-bar').style.width = '0%';
+document.getElementById('wants-bar').style.width = '0%';
+document.getElementById('savings-bar').style.width = '0%';
+}
 }
 
-createCandles();
 
-setInterval(() => {
-    document.querySelectorAll(".candle").forEach(candle => {
-        candle.style.height = (20 + Math.random() * 100) + "px";
-        candle.className = "candle " +
-            (Math.random() > 0.5 ? "green" : "red");
-    });
-}, 1500);
-</script><script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("candleContainer");
-        const maxCandles = 35;
 
-        // Parameter Utama Gelombang Pasar
-        let basePrice = 120;       // Harga rata-rata tengah
-        let waveAngle = 0;         // Sudut fase gelombang sin
-        let momentum = 0;          // Dorongan tren (inersia)
-        let currentPrice = basePrice;
+---
 
-        function generateCandleData() {
-            // 1. Hitung arah tren alami menggunakan siklus gelombang (Sine Wave)
-            waveAngle += 0.15; // Kecepatan pergantian fase naik/turun
-            const waveForce = Math.sin(waveAngle) * 3.5; 
+### 🎨 Tambahan Style CSS (Tambahkan ke dalam `style.css` Anda)
 
-            // 2. Akumulasi momentum (simulasi dorongan buyer/seller)
-            momentum = momentum * 0.8 + waveForce * 0.2;
+Agar desain kalkulator baru ini menyatu dengan tema gelap bawaan website **RIZZ.MONEY**, silakan tempel (*paste*) kode CSS ini di bagian paling bawah dokumen **`style.css`** Anda:
 
-            // 3. Tambahkan sedikit noise/fluktuasi pasar acak
-            const noise = (Math.random() - 0.49) * 4;
-            const change = momentum + noise;
+```css
+/* ==========================================================================
+   STYLE UNTUK WIDGET KALKULATOR 50/30/20
+   ========================================================================== */
+.calculator-section {
+    background-color: #0b0f12;
+    text-align: center;
+}
 
-            const open = currentPrice;
-            let close = open + change;
+.calculator-section h2 span {
+    color: #00e676;
+}
 
-            // Batasi ketinggian agar tidak keluar dari area container hero
-            close = Math.max(30, Math.min(220, close));
+.calc-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+}
 
-            // Perhitungan Sumbu (Wick) Atas & Bawah
-            const high = Math.max(open, close) + Math.random() * 5;
-            const low = Math.min(open, close) - Math.random() * 5;
+.calc-container {
+    background-color: #12181b;
+    border: 1px solid #1f292d;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 550px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
-            currentPrice = close; // Simpan harga untuk candle berikutnya
+.calc-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
 
-            return { open, close, high, low };
-        }
+.calc-subtitle {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
 
-        function createCandle() {
-            const { open, close, high, low } = generateCandleData();
-            const isGreen = close >= open;
+.input-group {
+    margin-bottom: 25px;
+}
 
-            const candle = document.createElement("div");
-            candle.classList.add("candle", isGreen ? "green" : "red");
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #00e676;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
 
-            // Ukuran Body Candle
-            const bodyHeight = Math.max(4, Math.abs(close - open));
-            const bodyBottom = Math.min(open, close);
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-            candle.style.height = `${bodyHeight}px`;
-            candle.style.bottom = `${bodyBottom}px`;
+.currency-prefix {
+    position: absolute;
+    left: 15px;
+    color: #64748b;
+    font-weight: bold;
+}
 
-            // Ukuran Sumbu (Wick)
-            const wickTop = -Math.abs(high - Math.max(open, close));
-            const wickBottom = -Math.abs(Math.min(open, close) - low);
+.calc-container input[type="number"] {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    background-color: #1a2327;
+    border: 1px solid #2e3c42;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
 
-            candle.style.setProperty("--wick-top", `${wickTop}px`);
-            candle.style.setProperty("--wick-bottom", `${wickBottom}px`);
+.calc-container input[type="number"]:focus {
+    border-color: #00e676;
+}
 
-            container.appendChild(candle);
+.result-item {
+    margin-bottom: 20px;
+}
 
-            // Geser & Hapus candle terlama di sebelah kiri
-            if (container.children.length > maxCandles) {
-                container.removeChild(container.firstChild);
-            }
-        }
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
 
-        // Isi grafik awal secara penuh saat load
-        for (let i = 0; i < 30; i++) {
-            createCandle();
-        }
+.label-text {
+    font-weight: 500;
+    color: #ffffff;
+}
 
-        // Jalankan running chart dinamis setiap 500ms
-        setInterval(createCandle, 500);
-    });
-</script><!-- Modal Get Started -->
-<div class="modal-overlay" id="getStartedModal">
-    <div class="modal-content">
-        <button class="modal-close" id="closeModal">&times;</button>
-        <h3>Mulai Perjalanan Anda 🚀</h3>
-        <p>Daftar gratis untuk mendapatkan tips keuangan dan panduan eksklusif dari RIZZ.MONEY.</p>
-        <form class="modal-form" onsubmit="event.preventDefault(); alert('Terima kasih! Anda berhasil mendaftar.'); document.getElementById('getStartedModal').classList.remove('active');">
-            <input type="text" placeholder="Nama Lengkap" required>
-            <input type="email" placeholder="Alamat Email" required>
-            <button type="submit">Daftar Sekarang</button>
-        </form>
-    </div>
-</div>
+.amount-text {
+    font-weight: bold;
+    color: #00e676;
+}
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. Logika Modal Get Started ---
-        const modal = document.getElementById("getStartedModal");
-        const closeModalBtn = document.getElementById("closeModal");
-        const getStartedBtns = document.querySelectorAll('a[href="#features"].nav-btn, .hero-buttons .primary-btn');
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #1a2327;
+    border-radius: 5px;
+    overflow: hidden;
+}
 
-        // Buka modal saat tombol Get Started diklik
-        getStartedBtns.forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                modal.classList.add("active");
-            });
-        });
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease-out;
+}
 
-        // Tutup modal
-        closeModalBtn.addEventListener("click", () => {
-            modal.classList.remove("active");
-        });
-
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.classList.remove("active");
-            }
-        });
-
-        // --- 2. Smooth Scroll untuk Navigasi Lainnya ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener("click", function (e) {
-                if (this.classList.contains("nav-btn")) return; // Lewati jika tombol Get Started modal
-                
-                const targetId = this.getAttribute("href");
-                if (targetId === "#") return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    targetElement.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-    });
-</script>
-</body>
-</html>
+.needs .progress-fill { background-color: #ff5252; }
+.wants .progress-fill { background-color: #ffb142; }
+.savings .progress-fill { background-color: #00e676; }
