@@ -496,4 +496,18 @@ footer p {
         filter: brightness(1.3);
     }
 }
+/* Efek Denyut Live pada Candle Ujung Kanan (Paling Aktif) */
+.candle:last-child {
+    animation: liveFluctuation 0.5s infinite alternate ease-in-out;
+}
 
+@keyframes liveFluctuation {
+    0% {
+        transform: translateY(0px) scaleY(0.95);
+        filter: brightness(0.9);
+    }
+    100% {
+        transform: translateY(-3px) scaleY(1.05);
+        filter: brightness(1.3);
+    }
+}
