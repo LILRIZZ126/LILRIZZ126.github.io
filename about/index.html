@@ -1,1 +1,275 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RIZZ.FINANCE - Platform edukasi dan perencanaan keuangan modern.">
+    <title>RIZZ.FINANCE | Financial Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="financeChart"></canvas>
+    <div class="glow"></div>
+
+    <header class="navbar">
+        <a href="#home" class="logo">RIZZ<span>.FINANCE</span></a>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <nav id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#education">Education</a>
+        </nav>
+
+        <a href="#contact" class="nav-btn">Explore Now ↗</a>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="tag">
+                    <span></span> THE FUTURE OF FINANCE
+                </div>
+
+                <h1>
+                    Think Smart.<br>
+                    Manage Money.<br>
+                    <span>Build Wealth.</span>
+                </h1>
+
+                <p>
+                    Kenali dunia keuangan, bangun strategi pengelolaan uang,
+                    dan persiapkan masa depan finansial dengan pengetahuan
+                    yang lebih baik.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#services" class="primary-btn">Discover More ↗</a>
+                    <a href="#about" class="outline-btn">Learn About Us</a>
+                </div>
+
+                <div class="hero-info">
+                    <div>
+                        <h3>01</h3>
+                        <p>Financial Planning</p>
+                    </div>
+                    <div>
+                        <h3>02</h3>
+                        <p>Money Management</p>
+                    </div>
+                    <div>
+                        <h3>03</h3>
+                        <p>Financial Education</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard">
+                <div class="dashboard-header">
+                    <div>
+                        <p>FINANCIAL OVERVIEW</p>
+                        <h3>Smart Finance</h3>
+                    </div>
+                    <span class="demo">DEMO</span>
+                </div>
+
+                <div class="balance">
+                    <p>Example Portfolio</p>
+                    <h2>Rp 25.000.000</h2>
+                    <small>Simulasi ilustrasi, bukan nilai investasi nyata</small>
+                </div>
+
+                <div class="chart-area">
+                    <div class="chart-label">
+                        <span>Financial Growth</span>
+                        <span>Illustration</span>
+                    </div>
+                    <svg viewBox="0 0 400 150" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#00e99a" stop-opacity=".3"/>
+                                <stop offset="100%" stop-color="#00e99a" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="area" d="M0 125 C40 110 50 120 90 90 S150 105 190 70 S250 85 285 45 S340 55 400 10 V150 H0 Z"/>
+                        <path class="line" d="M0 125 C40 110 50 120 90 90 S150 105 190 70 S250 85 285 45 S340 55 400 10"/>
+                    </svg>
+                </div>
+
+                <div class="dashboard-bottom">
+                    <div>
+                        <span>Planning</span>
+                        <strong>Financial Goals</strong>
+                    </div>
+                    <div class="circle">↗</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+            <div class="section-title">
+                <span class="eyebrow">WHO WE ARE</span>
+                <h2>Understand Money.<br><span>Understand Your Future.</span></h2>
+                <p>
+                    RIZZ.FINANCE merupakan konsep platform edukasi keuangan
+                    yang membantu masyarakat memahami pengelolaan uang,
+                    perencanaan anggaran, dan literasi finansial.
+                </p>
+            </div>
+
+            <div class="about-cards">
+                <article class="card">
+                    <span class="card-number">01 / PLAN</span>
+                    <div class="icon">◈</div>
+                    <h3>Financial Planning</h3>
+                    <p>Pelajari cara membuat perencanaan keuangan yang terarah.</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-number">02 / MANAGE</span>
+                    <div class="icon">▤</div>
+                    <h3>Money Management</h3>
+                    <p>Kelola pemasukan dan pengeluaran secara bijak.</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-number">03 / GROW</span>
+                    <div class="icon">↗</div>
+                    <h3>Financial Growth</h3>
+                    <p>Bangun pemahaman tentang tabungan dan risiko investasi.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section services" id="services">
+            <div class="section-title">
+                <span class="eyebrow">WHAT WE OFFER</span>
+                <h2>Everything About <span>Finance.</span></h2>
+                <p>Kenali berbagai bidang penting dalam dunia keuangan.</p>
+            </div>
+
+            <div class="service-grid">
+                <article class="service-card">
+                    <span class="service-icon">01</span>
+                    <h3>Budget Management</h3>
+                    <p>Belajar mengatur anggaran dan mengontrol pengeluaran.</p>
+                    <a href="#calculator">Explore ↗</a>
+                </article>
+
+                <article class="service-card">
+                    <span class="service-icon">02</span>
+                    <h3>Saving Strategy</h3>
+                    <p>Pelajari metode menabung dan menentukan target finansial.</p>
+                    <a href="#education">Explore ↗</a>
+                </article>
+
+                <article class="service-card">
+                    <span class="service-icon">03</span>
+                    <h3>Investment Literacy</h3>
+                    <p>Kenali instrumen investasi, potensi keuntungan, dan risikonya.</p>
+                    <a href="#education">Explore ↗</a>
+                </article>
+
+                <article class="service-card">
+                    <span class="service-icon">04</span>
+                    <h3>Financial Analysis</h3>
+                    <p>Pahami informasi dan data keuangan untuk mengambil keputusan.</p>
+                    <a href="#education">Explore ↗</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- CALCULATOR -->
+        <section class="section calculator" id="calculator">
+            <div class="section-title">
+                <span class="eyebrow">FINANCIAL TOOL</span>
+                <h2>Calculate Your <span>Budget.</span></h2>
+                <p>Simulasi pembagian pemasukan menggunakan metode 50/30/20.</p>
+            </div>
+
+            <div class="calculator-box">
+                <div class="input-area">
+                    <h3>Monthly Income</h3>
+                    <label for="income">Masukkan pemasukan bulanan (Rupiah)</label>
+                    <input type="number" id="income" min="1" placeholder="Contoh: 5000000">
+                    <button id="calculate">Calculate Budget ↗</button>
+                </div>
+
+                <div class="result-area">
+                    <h3>Your Budget Plan</h3>
+
+                    <div class="result-item">
+                        <div><span>Kebutuhan 50%</span><strong id="needs">Rp 0</strong></div>
+                        <div class="progress"><span id="needsBar"></span></div>
+                    </div>
+
+                    <div class="result-item">
+                        <div><span>Keinginan 30%</span><strong id="wants">Rp 0</strong></div>
+                        <div class="progress"><span id="wantsBar"></span></div>
+                    </div>
+
+                    <div class="result-item">
+                        <div><span>Tabungan 20%</span><strong id="savings">Rp 0</strong></div>
+                        <div class="progress"><span id="savingsBar"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section class="section" id="education">
+            <div class="section-title">
+                <span class="eyebrow">FINANCIAL KNOWLEDGE</span>
+                <h2>Knowledge Is Your <span>Best Asset.</span></h2>
+                <p>Mulai perjalanan memahami keuangan dari hal sederhana.</p>
+            </div>
+
+            <div class="education-grid">
+                <article class="education-card">
+                    <span>FINANCIAL BASICS</span>
+                    <h3>Learn to Budget</h3>
+                    <p>Ketahui bagaimana menyusun anggaran yang sesuai dengan kebutuhan.</p>
+                </article>
+
+                <article class="education-card">
+                    <span>INVESTMENT BASICS</span>
+                    <h3>Understand Investment</h3>
+                    <p>Pelajari hubungan antara potensi keuntungan, risiko, dan waktu.</p>
+                </article>
+
+                <article class="education-card">
+                    <span>FINANCIAL HABITS</span>
+                    <h3>Build Better Habits</h3>
+                    <p>Biasakan mencatat keuangan dan mengevaluasi pengeluaran.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta" id="contact">
+            <span class="eyebrow">YOUR FINANCIAL JOURNEY</span>
+            <h2>Make Better Decisions.<br><span>Build A Better Future.</span></h2>
+            <p>Pengetahuan keuangan adalah langkah pertama menuju masa depan yang lebih terencana.</p>
+            <a href="#calculator" class="primary-btn">Start Your Journey ↗</a>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#home" class="logo">RIZZ<span>.FINANCE</span></a>
+        <p>© 2026 RIZZ.FINANCE | Financial Education</p>
+        <p>Learn Smart. Think Forward.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
