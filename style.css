@@ -1,3 +1,6 @@
+/* =========================================
+   RIZZ.MONEY - GLOBAL
+========================================= */
 
 * {
     margin: 0;
@@ -7,30 +10,43 @@
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-padding-top: 90px;
+}
+
 body {
     background: #070b09;
-    color: white;
+    color: #ffffff;
     overflow-x: hidden;
 }
 
-/* NAVBAR */
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 8%;
-    background: rgba(7, 11, 9, 0.9);
+    padding: 22px 8%;
+    background: rgba(7, 11, 9, 0.92);
     position: sticky;
     top: 0;
     z-index: 100;
     backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 230, 138, 0.08);
 }
 
 .logo {
     font-size: 25px;
     font-weight: 800;
     letter-spacing: 1px;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .logo span {
@@ -40,12 +56,13 @@ body {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 28px;
 }
 
 .nav-links a {
-    color: #ccc;
+    color: #cccccc;
     text-decoration: none;
+    font-size: 13px;
     transition: 0.3s;
 }
 
@@ -55,39 +72,61 @@ body {
 
 .nav-btn {
     text-decoration: none;
-    color: #000;
+    color: #001b10;
     background: #00e68a;
-    padding: 12px 22px;
+    padding: 11px 22px;
     border-radius: 30px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s;
 }
 
-/* HERO */
+.nav-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px #00e68a55;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
 
 .hero {
     min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 45px;
     padding: 80px 10%;
     position: relative;
+    isolation: isolate;
     overflow: hidden;
+
     background:
-      radial-gradient(circle at 80% 40%, #063b29 0%, transparent 35%),
-      linear-gradient(135deg, #070b09, #0b1711, #07100c);
+        radial-gradient(circle at 80% 40%, #063b29 0%, transparent 35%),
+        linear-gradient(135deg, #070b09, #0b1711, #07100c);
+
     background-size: 200% 200%;
     animation: backgroundMove 10s ease infinite;
 }
 
 @keyframes backgroundMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .hero-content {
     max-width: 620px;
-    z-index: 2;
+    position: relative;
+    z-index: 3;
 }
 
 .tagline {
@@ -111,10 +150,11 @@ body {
 }
 
 .description {
-    color: #aaa;
+    color: #aaaaaa;
     margin-top: 25px;
     line-height: 1.9;
     max-width: 550px;
+    font-size: 14px;
 }
 
 .hero-buttons {
@@ -131,6 +171,7 @@ body {
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 13px;
     transition: 0.3s;
 }
 
@@ -141,27 +182,37 @@ body {
 
 .secondary-btn {
     border: 1px solid #00e68a;
-    color: white;
+    color: #ffffff;
 }
 
 .primary-btn:hover,
-.secondary-btn:hover,
-.nav-btn:hover {
+.secondary-btn:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 25px #00e68a55;
 }
 
-/* MONEY CARD */
+/* =========================================
+   MONEY CARD
+========================================= */
 
 .money-card {
     width: 320px;
     min-height: 340px;
     padding: 30px;
     border-radius: 25px;
-    background: linear-gradient(135deg, #103b29, #071b12);
+
+    background: linear-gradient(
+        135deg,
+        #103b29,
+        #071b12
+    );
+
     border: 1px solid #00e68a55;
     box-shadow: 0 0 60px #00e68a22;
-    z-index: 2;
+
+    position: relative;
+    z-index: 3;
+
     animation: floating 4s ease-in-out infinite;
 }
 
@@ -178,7 +229,7 @@ body {
 
 .money-card > p {
     margin-top: 75px;
-    color: #aaa;
+    color: #aaaaaa;
     font-size: 11px;
     letter-spacing: 2px;
 }
@@ -195,11 +246,98 @@ body {
 }
 
 @keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
-/* GLOW EFFECT */
+/* =========================================
+   CANDLESTICK BACKGROUND
+========================================= */
+
+.trading-chart {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.48;
+    pointer-events: none;
+
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 95%,
+        transparent
+    );
+
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 95%,
+        transparent
+    );
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(#ffffff10 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff10 1px, transparent 1px);
+
+    background-size: 55px 45px;
+}
+
+.candle-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.candle {
+    position: absolute;
+    width: 10px;
+    min-height: 3px;
+}
+
+.candle-wick {
+    position: absolute;
+    width: 2px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    opacity: 0.9;
+}
+
+.candle-body {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    border-radius: 1px;
+}
+
+.candle.green .candle-wick,
+.candle.green .candle-body {
+    background: #00e68a;
+    box-shadow: 0 0 10px #00e68a80;
+}
+
+.candle.red .candle-wick,
+.candle.red .candle-body {
+    background: #ff4655;
+    box-shadow: 0 0 10px #ff465580;
+}
+
+/* =========================================
+   GLOW EFFECT
+========================================= */
 
 .glow {
     position: absolute;
@@ -207,6 +345,8 @@ body {
     filter: blur(100px);
     opacity: 0.25;
     animation: glowMove 8s infinite alternate;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .glow-one {
@@ -226,11 +366,18 @@ body {
 }
 
 @keyframes glowMove {
-    from { transform: translate(0, 0); }
-    to { transform: translate(60px, -40px); }
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(60px, -40px);
+    }
 }
 
-/* SECTIONS */
+/* =========================================
+   GENERAL SECTIONS
+========================================= */
 
 .section {
     padding: 100px 10%;
@@ -241,16 +388,26 @@ body {
 .cta h2 {
     font-size: 38px;
     margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* ABOUT */
+
+.about {
+    background: #070b09;
 }
 
 .about > p:last-child {
     max-width: 750px;
     margin: auto;
     line-height: 2;
-    color: #aaa;
+    color: #aaaaaa;
+    font-size: 14px;
 }
 
-/* FEATURES */
+/* =========================================
+   FEATURES
+========================================= */
 
 .features {
     background: #0b120e;
@@ -284,16 +441,176 @@ body {
 
 .feature-card h3 {
     margin-bottom: 15px;
+    font-size: 16px;
 }
 
 .feature-card p,
 .tip p {
-    color: #aaa;
+    color: #aaaaaa;
     font-size: 13px;
     line-height: 1.8;
 }
 
-/* TIPS */
+/* =========================================
+   CALCULATOR 50/30/20
+========================================= */
+
+.calculator-section {
+    background: #0b0f12;
+    text-align: center;
+}
+
+.calculator-intro {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: -10px;
+}
+
+.calc-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 35px;
+}
+
+.calc-container {
+    background: #12181b;
+    border: 1px solid #1f292d;
+    border-radius: 16px;
+    padding: 35px;
+    width: 100%;
+    max-width: 550px;
+    text-align: left;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.calc-container h3 {
+    font-size: 23px;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.calc-subtitle {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: #00e676;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency-prefix {
+    position: absolute;
+    left: 15px;
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+.calc-container input[type="number"] {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    background: #1a2327;
+    border: 1px solid #2e3c42;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.calc-container input[type="number"]:focus {
+    border-color: #00e676;
+}
+
+.calc-container input::placeholder {
+    color: #64748b;
+}
+
+.result-item {
+    margin-bottom: 23px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.label-text {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.amount-text {
+    font-weight: 700;
+    color: #00e676;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #1a2327;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease-out;
+    border-radius: 5px;
+}
+
+.needs .progress-fill {
+    background: #ff5252;
+}
+
+.wants .progress-fill {
+    background: #ffb142;
+}
+
+.savings .progress-fill {
+    background: #00e676;
+}
+
+.calc-note {
+    color: #77858c;
+    font-size: 11px;
+    line-height: 1.8;
+    border-top: 1px solid #263238;
+    padding-top: 18px;
+    margin-top: 10px;
+}
+
+/* =========================================
+   MONEY TIPS
+========================================= */
+
+.tips {
+    background: #070b09;
+}
 
 .tips-grid {
     display: grid;
@@ -308,6 +625,12 @@ body {
     border-left: 2px solid #00e68a;
     background: #101812;
     border-radius: 10px;
+    transition: 0.3s;
+}
+
+.tip:hover {
+    transform: translateY(-8px);
+    background: #14231a;
 }
 
 .tip span {
@@ -320,48 +643,62 @@ body {
     margin: 15px 0;
 }
 
-/* CTA */
+/* =========================================
+   CALL TO ACTION
+========================================= */
 
 .cta {
     text-align: center;
     padding: 100px 20px;
-    background: linear-gradient(135deg, #0c2619, #07100c);
+
+    background: linear-gradient(
+        135deg,
+        #0c2619,
+        #07100c
+    );
 }
 
 .cta .primary-btn {
     margin-top: 15px;
 }
 
-/* FOOTER */
+/* =========================================
+   FOOTER
+========================================= */
 
 footer {
     padding: 40px 10%;
     text-align: center;
     background: #050806;
+    border-top: 1px solid #13241a;
 }
 
 footer p {
-    color: #777;
+    color: #777777;
     font-size: 12px;
     margin-top: 12px;
 }
 
-/* RESPONSIVE */
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
+
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
     .hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 60px;
-    }
-
-    .description {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-buttons {
-        justify-content: center;
+        padding: 80px 6%;
     }
 
     .feature-grid {
@@ -369,17 +706,52 @@ footer p {
     }
 }
 
-@media (max-width: 600px) {
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
     .navbar {
-        padding: 20px 5%;
+        padding: 18px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 21px;
     }
 
     .nav-links {
         display: none;
     }
 
+    .nav-btn {
+        padding: 9px 15px;
+        font-size: 11px;
+    }
+
     .hero {
+        min-height: auto;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 55px;
         padding: 80px 6%;
+    }
+
+    .hero h1 {
+        font-size: clamp(34px, 9vw, 48px);
+    }
+
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 13px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
     }
 
     .money-card {
@@ -392,130 +764,23 @@ footer p {
         grid-template-columns: 1fr;
     }
 
+    .section {
+        padding: 75px 6%;
+    }
+
     .section h2,
     .cta h2 {
         font-size: 29px;
     }
-}
 
-/* =========================================
-   RIZZ.MONEY - LIVE CANDLESTICK BACKGROUND
-========================================= */
+    .calc-container {
+        padding: 24px 18px;
+    }
 
-.hero {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background: #050907;
-}
+    .result-header {
+        font-size: 11px;
+    }
 
-.trading-chart {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    opacity: 0.48;
-    pointer-events: none;
-
-    mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 8%,
-        black 95%,
-        transparent
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 8%,
-        black 95%,
-        transparent
-    );
-}
-
-/* Grid trading */
-
-.chart-grid {
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        linear-gradient(#ffffff10 1px, transparent 1px),
-        linear-gradient(90deg, #ffffff10 1px, transparent 1px);
-
-    background-size: 55px 45px;
-}
-
-/* Candle container */
-
-.candle-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-}
-
-/* Candle utama */
-
-.candle {
-    position: absolute;
-    width: 10px;
-    min-height: 3px;
-    transition: left 0.45s linear;
-}
-
-/* Sumbu candle */
-
-.candle-wick {
-    position: absolute;
-    width: 2px;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    opacity: 0.9;
-}
-
-/* Body candle */
-
-.candle-body {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    border-radius: 1px;
-}
-
-/* Bullish */
-
-.candle.green .candle-wick,
-.candle.green .candle-body {
-    background: #00e68a;
-    box-shadow: 0 0 10px #00e68a80;
-}
-
-/* Bearish */
-
-.candle.red .candle-wick,
-.candle.red .candle-body {
-    background: #ff4655;
-    box-shadow: 0 0 10px #ff465580;
-}
-
-/* Konten tetap di depan chart */
-
-.hero-content,
-.money-card {
-    position: relative;
-    z-index: 2;
-}
-
-/* Glow tetap berada di belakang konten */
-
-.glow {
-    z-index: 1;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
     .trading-chart {
         opacity: 0.30;
     }
@@ -523,10 +788,24 @@ footer p {
     .candle {
         width: 7px;
     }
+
+    .glow {
+        filter: blur(80px);
+    }
 }
 
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
 @media (prefers-reduced-motion: reduce) {
-    .candle {
-        transition: none;
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
