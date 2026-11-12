@@ -199,68 +199,153 @@
     </footer>
 
     <!-- --- LOGIKAJAVASCRIPT --- -->
-    <script>
-        // 1. Script Efek Chart Market (Hero)
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("candleContainer");
-            const maxCandles = 35;
+    
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("candleContainer");
+    const hero = document.querySelector(".hero");
 
-            let basePrice = 120;       
-            let waveAngle = 0;         
-            let momentum = 0;          
-            let currentPrice = basePrice;
+    if (!container || !hero) return;
 
-            function generateCandleData() {
-                waveAngle += 0.15; 
-                const waveForce = Math.sin(waveAngle) * 3.5; 
-                momentum = momentum * 0.8 + waveForce * 0.2;
-                const noise = (Math.random() - 0.49) * 4;
-                const change = momentum + noise;
+    const maxCandles = 45;
+    const minPrice = 40;
+    const maxPrice = 200;
 
-                const open = currentPrice;
-                let close = open + change;
+    let currentPrice = 120;
+    let momentum = 0;
+    let trend = 1;
+    let trendDuration = 0;
 
-                close = Math.max(30, Math.min(220, close));
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
 
-                const high = Math.max(open, close) + Math.random() * 5;
-                const low = Math.min(open, close) - Math.random() * 5;
+    function priceToPixel(price) {
+        const height = container.clientHeight;
+        return ((price - minPrice) / (maxPrice - minPrice)) * height;
+    }
 
-                currentPrice = close; 
-                return { open, close, high, low };
-            }
+    function generateCandle() {
+        trendDuration++;
 
-            function createCandle() {
-                const { open, close, high, low } = generateCandleData();
-                const isGreen = close >= open;
+        // Tren pasar berganti secara berkala
+        if (trendDuration > Math.floor(random(10, 24))) {
+            trend *= -1;
+            trendDuration = 0;
+        }
 
-                const candle = document.createElement("div");
-                candle.classList.add("candle", isGreen ? "green" : "red");
+        // Momentum mengikuti arah tren
+        const noise = random(-2.8, 2.8);
+        momentum = momentum * 0.55 + trend * 1.7 + noise;
 
-                const bodyHeight = Math.max(4, Math.abs(close - open));
-                const bodyBottom = Math.min(open, close);
+        const open = currentPrice;
 
-                candle.style.height = `${bodyHeight}px`;
-                candle.style.bottom = `${bodyBottom}px`;
+        let close = open + momentum;
+        close = Math.max(minPrice + 5, Math.min(maxPrice - 5, close));
 
-                const wickTop = -Math.abs(high - Math.max(open, close));
-                const wickBottom = -Math.abs(Math.min(open, close) - low);
+        const high = Math.min(
+            maxPrice,
+            Math.max(open, close) + random(1, 7)
+        );
 
-                candle.style.setProperty("--wick-top", `${wickTop}px`);
-                candle.style.setProperty("--wick-bottom", `${wickBottom}px`);
+        const low = Math.max(
+            minPrice,
+            Math.min(open, close) - random(1, 7)
+        );
 
-                container.appendChild(candle);
+        currentPrice = close;
 
-                if (container.children.length > maxCandles) {
-                    container.removeChild(container.firstChild);
-                }
-            }
+        return { open, close, high, low };
+    }
 
-            // Inisialisasi awal lilin grafik hero
-            for (let i = 0; i < maxCandles; i++) {
-                createCandle();
-            }
-            setInterval(createCandle, 1500);
+    function createCandle(leftPosition) {
+        const data = generateCandle();
+        const { open, close, high, low } = data;
+
+        const candle = document.createElement("div");
+        candle.className = "candle";
+
+        candle.classList.add(
+            close >= open ? "green" : "red"
+        );
+
+        const wick = document.createElement("div");
+        wick.className = "candle-wick";
+
+        const body = document.createElement("div");
+        body.className = "candle-body";
+
+        const lowPixel = priceToPixel(low);
+        const highPixel = priceToPixel(high);
+        const openPixel = priceToPixel(open);
+        const closePixel = priceToPixel(close);
+
+        const bodyBottom = Math.min(openPixel, closePixel) - lowPixel;
+        const bodyHeight = Math.max(
+            3,
+            Math.abs(closePixel - openPixel)
+        );
+
+        candle.style.left = `${leftPosition}px`;
+        candle.style.bottom = `${lowPixel}px`;
+        candle.style.height = `${highPixel - lowPixel}px`;
+
+        wick.style.height = "100%";
+
+        body.style.bottom = `${bodyBottom}px`;
+        body.style.height = `${bodyHeight}px`;
+
+        candle.appendChild(wick);
+        candle.appendChild(body);
+
+        container.appendChild(candle);
+    }
+
+    function initializeChart() {
+        container.innerHTML = "";
+
+        const width = container.clientWidth;
+        const spacing = width / maxCandles;
+
+        for (let i = 0; i < maxCandles; i++) {
+            createCandle(i * spacing);
+        }
+    }
+
+    function updateChart() {
+        const width = container.clientWidth;
+        const spacing = width / maxCandles;
+
+        // Geser semua candle ke kiri
+        const candles = container.querySelectorAll(".candle");
+
+        candles.forEach(candle => {
+            const currentLeft = parseFloat(candle.style.left);
+            candle.style.left = `${currentLeft - spacing}px`;
         });
+
+        // Hapus candle yang sudah keluar layar
+        const first = container.firstElementChild;
+
+        if (first && parseFloat(first.style.left) < -spacing) {
+            first.remove();
+        }
+
+        // Tambahkan candle baru dari sebelah kanan
+        createCandle(width - spacing);
+    }
+
+    initializeChart();
+
+    let chartInterval = setInterval(updateChart, 450);
+
+    // Sesuaikan chart saat ukuran layar berubah
+    window.addEventListener("resize", () => {
+        clearInterval(chartInterval);
+        initializeChart();
+        chartInterval = setInterval(updateChart, 450);
+    });
+});
+
 
         // 2. Script Hitung Kalkulator Finansial
         function formatRupiah(angka) {
