@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#070b09">
+    <meta name="description" content="RIZZ.MONEY - Learn money management, budgeting, saving, and financial literacy.">
+
     <title>RIZZ.MONEY | Smart Money Management</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo">RIZZ<span>.MONEY</span></div>
+        <a href="#home" class="logo">RIZZ<span>.MONEY</span></a>
 
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
@@ -23,8 +34,10 @@
         <a href="#calculator" class="nav-btn">Get Started</a>
     </nav>
 
+    <!-- HERO -->
     <section class="hero" id="home">
-        <div class="trading-chart">
+
+        <div class="trading-chart" aria-hidden="true">
             <div class="chart-grid"></div>
             <div class="candle-container" id="candleContainer"></div>
         </div>
@@ -56,6 +69,7 @@
             </div>
 
             <p>SMART FINANCIAL HABITS</p>
+
             <h2>Think Smart.<br>Spend Wise.</h2>
 
             <div class="card-bottom">
@@ -66,24 +80,36 @@
 
         <div class="glow glow-one"></div>
         <div class="glow glow-two"></div>
+
     </section>
 
+    <!-- ABOUT -->
     <section class="about section" id="about">
+
         <p class="tagline">ABOUT RIZZ.MONEY</p>
-        <h2>Understand Money.<br><span>Control Your Future.</span></h2>
+
+        <h2>
+            Understand Money.<br>
+            <span>Control Your Future.</span>
+        </h2>
 
         <p>
             RIZZ.MONEY is a financial education platform designed
             to help people understand money management, budgeting,
             saving, and responsible financial decisions.
         </p>
+
     </section>
 
+    <!-- FEATURES -->
     <section class="features section" id="features">
+
         <p class="tagline">WHAT WE TEACH</p>
+
         <h2>Build Your Financial Skills</h2>
 
         <div class="feature-grid">
+
             <div class="feature-card">
                 <div class="icon">💰</div>
                 <h3>Money Management</h3>
@@ -107,65 +133,129 @@
                 <h3>Financial Literacy</h3>
                 <p>Understand financial concepts and make informed decisions.</p>
             </div>
+
         </div>
     </section>
 
-    <!-- --- SEKSI TAMBAHAN: KALKULATOR INTERAKTIF --- -->
+    <!-- CALCULATOR -->
     <section class="calculator-section section" id="calculator">
+
         <p class="tagline">INTERACTIVE BUDGETING</p>
+
         <h2>Try 50/30/20 Budget Rule</h2>
-        
+
+        <p class="calculator-intro">
+            Pelajari cara membagi pendapatan bulanan dengan lebih terencana.
+        </p>
+
         <div class="calc-wrapper">
+
             <div class="calc-container">
-                <h2>Perencana Anggaran</h2>
-                <p class="calc-subtitle">Bagi pendapatan bulanan Anda ke dalam pos yang ideal secara instan.</p>
+
+                <h3>Perencana Anggaran</h3>
+
+                <p class="calc-subtitle">
+                    Masukkan pendapatan bulanan untuk melihat pembagian anggaran.
+                </p>
 
                 <div class="input-group">
-                    <label for="income">Total Pendapatan Bulanan</label>
+
+                    <label for="income">
+                        Total Pendapatan Bulanan
+                    </label>
+
                     <div class="input-wrapper">
                         <span class="currency-prefix">Rp</span>
-                        <input type="number" id="income" placeholder="Contoh: 5000000" oninput="hitungAnggaran()">
+
+                        <input
+                            type="number"
+                            id="income"
+                            placeholder="Contoh: 5000000"
+                            min="0"
+                            step="any"
+                            inputmode="decimal"
+                        >
                     </div>
+
                 </div>
 
+                <!-- NEEDS -->
                 <div class="result-item needs">
+
                     <div class="result-header">
-                        <span class="label-text">Kebutuhan Pokok (50%)</span>
-                        <span class="amount-text" id="needs-val">Rp 0</span>
+                        <span class="label-text">
+                            Kebutuhan Pokok (50%)
+                        </span>
+
+                        <span class="amount-text" id="needs-val">
+                            Rp0
+                        </span>
                     </div>
+
                     <div class="progress-bar">
                         <div class="progress-fill" id="needs-bar"></div>
                     </div>
+
                 </div>
 
+                <!-- WANTS -->
                 <div class="result-item wants">
+
                     <div class="result-header">
-                        <span class="label-text">Keinginan & Hiburan (30%)</span>
-                        <span class="amount-text" id="wants-val">Rp 0</span>
+                        <span class="label-text">
+                            Keinginan & Hiburan (30%)
+                        </span>
+
+                        <span class="amount-text" id="wants-val">
+                            Rp0
+                        </span>
                     </div>
+
                     <div class="progress-bar">
                         <div class="progress-fill" id="wants-bar"></div>
                     </div>
+
                 </div>
 
+                <!-- SAVINGS -->
                 <div class="result-item savings">
+
                     <div class="result-header">
-                        <span class="label-text">Tabungan & Investasi (20%)</span>
-                        <span class="amount-text" id="savings-val">Rp 0</span>
+                        <span class="label-text">
+                            Tabungan & Investasi (20%)
+                        </span>
+
+                        <span class="amount-text" id="savings-val">
+                            Rp0
+                        </span>
                     </div>
+
                     <div class="progress-bar">
                         <div class="progress-fill" id="savings-bar"></div>
                     </div>
+
                 </div>
+
+                <p class="calc-note">
+                    Catatan: aturan 50/30/20 adalah panduan sederhana.
+                    Sesuaikan dengan kebutuhan dan kondisi keuanganmu.
+                </p>
+
             </div>
+
         </div>
+
     </section>
 
+    <!-- MONEY TIPS -->
     <section class="tips section" id="tips">
+
         <p class="tagline">FINANCIAL KNOWLEDGE</p>
+
         <h2>3 Rules To Manage Your Money</h2>
 
         <div class="tips-grid">
+
             <div class="tip">
                 <span>01</span>
                 <h3>Track Your Expenses</h3>
@@ -183,327 +273,39 @@
                 <h3>Spend Wisely</h3>
                 <p>Separate needs from wants before spending.</p>
             </div>
+
         </div>
+
     </section>
 
+    <!-- CTA -->
     <section class="cta">
+
         <p class="tagline">START YOUR FINANCIAL JOURNEY</p>
-        <h2>Your Future Starts<br><span>With Smart Decisions.</span></h2>
-        <a href="#home" class="primary-btn">Back To Top ↑</a>
+
+        <h2>
+            Your Future Starts<br>
+            <span>With Smart Decisions.</span>
+        </h2>
+
+        <a href="#home" class="primary-btn">
+            Back To Top ↑
+        </a>
+
     </section>
 
+    <!-- FOOTER -->
     <footer>
-        <div class="logo">RIZZ<span>.MONEY</span></div>
+
+        <a href="#home" class="logo">
+            RIZZ<span>.MONEY</span>
+        </a>
+
         <p>© 2026 RIZZ.MONEY. Learn Today, Grow Tomorrow.</p>
+
         <p>Financial Education Platform</p>
+
     </footer>
 
-    <!-- --- LOGIKAJAVASCRIPT --- -->
-    
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("candleContainer");
-    const hero = document.querySelector(".hero");
-
-    if (!container || !hero) return;
-
-    const maxCandles = 45;
-    const minPrice = 40;
-    const maxPrice = 200;
-
-    let currentPrice = 120;
-    let momentum = 0;
-    let trend = 1;
-    let trendDuration = 0;
-
-    function random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    function priceToPixel(price) {
-        const height = container.clientHeight;
-        return ((price - minPrice) / (maxPrice - minPrice)) * height;
-    }
-
-    function generateCandle() {
-        trendDuration++;
-
-        // Tren pasar berganti secara berkala
-        if (trendDuration > Math.floor(random(10, 24))) {
-            trend *= -1;
-            trendDuration = 0;
-        }
-
-        // Momentum mengikuti arah tren
-        const noise = random(-2.8, 2.8);
-        momentum = momentum * 0.55 + trend * 1.7 + noise;
-
-        const open = currentPrice;
-
-        let close = open + momentum;
-        close = Math.max(minPrice + 5, Math.min(maxPrice - 5, close));
-
-        const high = Math.min(
-            maxPrice,
-            Math.max(open, close) + random(1, 7)
-        );
-
-        const low = Math.max(
-            minPrice,
-            Math.min(open, close) - random(1, 7)
-        );
-
-        currentPrice = close;
-
-        return { open, close, high, low };
-    }
-
-    function createCandle(leftPosition) {
-        const data = generateCandle();
-        const { open, close, high, low } = data;
-
-        const candle = document.createElement("div");
-        candle.className = "candle";
-
-        candle.classList.add(
-            close >= open ? "green" : "red"
-        );
-
-        const wick = document.createElement("div");
-        wick.className = "candle-wick";
-
-        const body = document.createElement("div");
-        body.className = "candle-body";
-
-        const lowPixel = priceToPixel(low);
-        const highPixel = priceToPixel(high);
-        const openPixel = priceToPixel(open);
-        const closePixel = priceToPixel(close);
-
-        const bodyBottom = Math.min(openPixel, closePixel) - lowPixel;
-        const bodyHeight = Math.max(
-            3,
-            Math.abs(closePixel - openPixel)
-        );
-
-        candle.style.left = `${leftPosition}px`;
-        candle.style.bottom = `${lowPixel}px`;
-        candle.style.height = `${highPixel - lowPixel}px`;
-
-        wick.style.height = "100%";
-
-        body.style.bottom = `${bodyBottom}px`;
-        body.style.height = `${bodyHeight}px`;
-
-        candle.appendChild(wick);
-        candle.appendChild(body);
-
-        container.appendChild(candle);
-    }
-
-    function initializeChart() {
-        container.innerHTML = "";
-
-        const width = container.clientWidth;
-        const spacing = width / maxCandles;
-
-        for (let i = 0; i < maxCandles; i++) {
-            createCandle(i * spacing);
-        }
-    }
-
-    function updateChart() {
-        const width = container.clientWidth;
-        const spacing = width / maxCandles;
-
-        // Geser semua candle ke kiri
-        const candles = container.querySelectorAll(".candle");
-
-        candles.forEach(candle => {
-            const currentLeft = parseFloat(candle.style.left);
-            candle.style.left = `${currentLeft - spacing}px`;
-        });
-
-        // Hapus candle yang sudah keluar layar
-        const first = container.firstElementChild;
-
-        if (first && parseFloat(first.style.left) < -spacing) {
-            first.remove();
-        }
-
-        // Tambahkan candle baru dari sebelah kanan
-        createCandle(width - spacing);
-    }
-
-    initializeChart();
-
-    let chartInterval = setInterval(updateChart, 450);
-
-    // Sesuaikan chart saat ukuran layar berubah
-    window.addEventListener("resize", () => {
-        clearInterval(chartInterval);
-        initializeChart();
-        chartInterval = setInterval(updateChart, 450);
-    });
-});
-
-
-        // 2. Script Hitung Kalkulator Finansial
-        function formatRupiah(angka) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0
-            }).format(angka);
-        }
-
-        function hitungAnggaran() {
-Use code with caution.
-const incomeInput = document.getElementById('income').value;
-const income = parseFloat(incomeInput) || 0;
-const needs = income * 0.50;
-const wants = income * 0.30;
-const savings = income * 0.20;
-document.getElementById('needs-val').innerText = formatRupiah(needs);
-document.getElementById('wants-val').innerText = formatRupiah(wants);
-document.getElementById('savings-val').innerText = formatRupiah(savings);
-if (income > 0) {
-document.getElementById('needs-bar').style.width = '50%';
-document.getElementById('wants-bar').style.width = '30%';
-document.getElementById('savings-bar').style.width = '20%';
-} else {
-document.getElementById('needs-bar').style.width = '0%';
-document.getElementById('wants-bar').style.width = '0%';
-document.getElementById('savings-bar').style.width = '0%';
-}
-}
-
-
-
----
-
-### 🎨 Tambahan Style CSS (Tambahkan ke dalam `style.css` Anda)
-
-Agar desain kalkulator baru ini menyatu dengan tema gelap bawaan website **RIZZ.MONEY**, silakan tempel (*paste*) kode CSS ini di bagian paling bawah dokumen **`style.css`** Anda:
-
-```css
-/* ==========================================================================
-   STYLE UNTUK WIDGET KALKULATOR 50/30/20
-   ========================================================================== */
-.calculator-section {
-    background-color: #0b0f12;
-    text-align: center;
-}
-
-.calculator-section h2 span {
-    color: #00e676;
-}
-
-.calc-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 2rem;
-}
-
-.calc-container {
-    background-color: #12181b;
-    border: 1px solid #1f292d;
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;
-    max-width: 550px;
-    text-align: left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.calc-container h2 {
-    font-size: 1.4rem;
-    margin-bottom: 5px;
-    color: #ffffff;
-}
-
-.calc-subtitle {
-    color: #94a3b8;
-    font-size: 0.85rem;
-    margin-bottom: 25px;
-}
-
-.input-group {
-    margin-bottom: 25px;
-}
-
-.input-group label {
-    display: block;
-    font-size: 0.9rem;
-    color: #00e676;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.currency-prefix {
-    position: absolute;
-    left: 15px;
-    color: #64748b;
-    font-weight: bold;
-}
-
-.calc-container input[type="number"] {
-    width: 100%;
-    padding: 14px 15px 14px 45px;
-    background-color: #1a2327;
-    border: 1px solid #2e3c42;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 1.1rem;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.calc-container input[type="number"]:focus {
-    border-color: #00e676;
-}
-
-.result-item {
-    margin-bottom: 20px;
-}
-
-.result-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-}
-
-.label-text {
-    font-weight: 500;
-    color: #ffffff;
-}
-
-.amount-text {
-    font-weight: bold;
-    color: #00e676;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 10px;
-    background-color: #1a2327;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    transition: width 0.5s ease-out;
-}
-
-.needs .progress-fill { background-color: #ff5252; }
-.wants .progress-fill { background-color: #ffb142; }
-.savings .progress-fill { background-color: #00e676; }
+</body>
+</html>
